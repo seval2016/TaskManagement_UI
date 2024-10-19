@@ -1,4 +1,4 @@
-import { Avatar } from "@mui/material";
+import { Avatar, Button } from "@mui/material";
 import React, { useState } from "react";
 import "./Sidebar.css";
 
@@ -15,8 +15,15 @@ const role = "ROLE_ADMIN";
 
 const Sidebar = () => {
   const [activeMenu, setActiveMenu] = useState("DONE");
+  const handleMenuChange = (item) => {
+    setActiveMenu(item.name);
+  };
+
+  const handleLogout = () => {
+    console.log("Handle Log");
+  };
   return (
-    <div className="card min-h-[85vh] flex flex-col justify-center fixed w-[20vw]">
+    <div className="card min-h-[75vh] flex flex-col justify-center w-[20vw] sidebar">
       <div className="space-y-5 h-full">
         <div className="flex justify-center">
           <Avatar
@@ -28,12 +35,24 @@ const Sidebar = () => {
         {menu
           .filter((item) => item.role.includes(role))
           .map((item) => (
-            <p className={`py-3 px-5 rounded-full text-center 
-                cursor-pointer ${activeMenu===item.name? 
-                    "activeMenuItem":"menuItem"}`}>
+            <p
+              onClick={() => handleMenuChange(item)}
+              className={`py-3 px-5 rounded-full text-center 
+                cursor-pointer ${
+                  activeMenu === item.name ? "activeMenuItem" : "menuItem"
+                }`}
+            >
               {item.name}
             </p>
           ))}
+        <Button
+          onClick={handleLogout}
+          sx={{ padding: ".7rem", borderRadius: "2rem" }}
+          fullWidth
+          className="logoutButton"
+        >
+          logout
+        </Button>
       </div>
     </div>
   );
