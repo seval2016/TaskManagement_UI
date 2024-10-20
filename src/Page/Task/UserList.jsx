@@ -22,6 +22,8 @@ const style = {
   p: 2,
 };
 
+const tasks = [1, 1, 1, 1];
+
 export default function UserList({ handleClose, open }) {
   return (
     <div>
@@ -32,7 +34,7 @@ export default function UserList({ handleClose, open }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          {[1, 1, 1].map((item) => (
+          {tasks.map((item, index) => (
             <>
               <div className="flex items-center justify-between w-full">
                 <div>
@@ -49,8 +51,8 @@ export default function UserList({ handleClose, open }) {
                 <div>
                   <Button className="customeButton">Select</Button>
                 </div>
-                <Divider variant="inset" />
               </div>
+              {index !== tasks.length - 1 && <Divider variant="inset" />}
             </>
           ))}
         </Box>
