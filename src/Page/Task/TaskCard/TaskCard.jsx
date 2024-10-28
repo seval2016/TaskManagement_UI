@@ -96,17 +96,15 @@ const TaskCard = () => {
             "aria-labelledby": "basic-button",
           }}
         >
-          {role === "ROLE_ADMIN" ? (
-            <>
+          {role === "ROLE_ADMIN" && (
+            <div>
               <MenuItem onClick={handleOpenUserList}>Assigned User</MenuItem>
               <MenuItem onClick={handleOpenSubmissionList}>
                 See Submissions
               </MenuItem>
               <MenuItem onClick={handleOpenUpdateTaskModel}>Edit</MenuItem>
               <MenuItem onClick={handleDeleteTask}>Delete</MenuItem>
-            </>
-          ) : (
-            <></>
+            </div>
           )}
         </Menu>
       </div>

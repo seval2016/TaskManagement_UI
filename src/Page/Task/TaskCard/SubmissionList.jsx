@@ -28,12 +28,14 @@ export default function SubmissionList({ handleClose, open }) {
       >
         <Box sx={style}>
           <div>
-            {submissions.length > 0 ? <div className="space-y-2">{
-              submissions.map((item)=><SubmissionCard/>)
-            }</div> : (
-              <div className="">
-                <div className="text-center">No Submission Found</div>
+            {submissions.length > 0 ? (
+              <div className="space-y-2">
+                {submissions.map((item, index) => (
+                  <SubmissionCard key={index} />
+                ))}
               </div>
+            ) : (
+              <div className="text-center">No Submission Found</div>
             )}
           </div>
         </Box>

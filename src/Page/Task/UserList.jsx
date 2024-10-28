@@ -35,7 +35,7 @@ export default function UserList({ handleClose, open }) {
       >
         <Box sx={style}>
           {tasks.map((item, index) => (
-            <>
+            <React.Fragment key={index}>
               <div className="flex items-center justify-between w-full">
                 <div>
                   <ListItem>
@@ -53,7 +53,7 @@ export default function UserList({ handleClose, open }) {
                 </div>
               </div>
               {index !== tasks.length - 1 && <Divider variant="inset" />}
-            </>
+            </React.Fragment>
           ))}
         </Box>
       </Modal>

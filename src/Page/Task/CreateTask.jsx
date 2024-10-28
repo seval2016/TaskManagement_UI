@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import { Autocomplete, Grid2, TextField } from "@mui/material";
+import { Autocomplete, TextField, Button } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import dayjs from "dayjs";
 
 const style = {
   position: "absolute",
@@ -25,8 +26,8 @@ export default function CreateNewTaskForm({ handleClose, open }) {
     title: "",
     image: "",
     description: "",
-    tage: [],
-    deadline: new Date(),
+    tags: [],
+    deadline: dayjs(), // Başlangıçta geçerli bir dayjs nesnesi
   });
 
   const [selectedTags, setSelectedTags] = useState([]);
@@ -43,6 +44,31 @@ export default function CreateNewTaskForm({ handleClose, open }) {
     setSelectedTags(value);
   };
 
+  const handleDeadlineChange = (date) => {
+    if (date && date.isValid()) {
+      setFormData({
+        ...formData,
+        deadline: date, // Her zaman bir dayjs nesnesi olarak güncelleniyor
+      });
+    } else {
+      console.error("Geçersiz tarih seçildi.");
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formattedDeadline = formData.deadline.isValid() ? formData.deadline.toISOString() : ""; // ISO formatına çevir
+
+    const submittedData = {
+      ...formData,
+      deadline: formattedDeadline,
+      tags: selectedTags,
+    };
+
+    console.log("Submitted Data:", submittedData);
+    handleClose();
+  };
+
   return (
     <div>
       <Modal
@@ -52,54 +78,57 @@ export default function CreateNewTaskForm({ handleClose, open }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <form>
-            <Grid2 container spacing={2} alignItems="center">
-              <Grid2 item xs={12}>
-                <TextField
-                  label="Title"
-                  fullWidth
-                  name="title"
-                  value={formData.title}
-                  onChange={handleChange}
+          <form onSubmit={handleSubmit}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+              <TextField
+                label="Title"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+                sx={{ width: "320px" }}
+              />
+              <TextField
+                label="Image"
+                name="image"
+                value={formData.image}
+                onChange={handleChange}
+                sx={{ width: "320px" }}
+              />
+              <TextField
+                label="Description"
+                fullWidth
+                multiline
+                rows={4}
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+                sx={{ width: "320px" }}
+              />
+              <Autocomplete
+                multiple
+                options={tags}
+                onChange={handleTagsChange}
+                renderInput={(params) => (
+                  <TextField {...params} label="Tags" sx={{ width: "320px" }} />
+                )}
+              />
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DateTimePicker
+                  value={formData.deadline} // Burada dayjs nesnesi gönderiliyor
+                  onChange={handleDeadlineChange}
+                  label="Deadline"
+                  renderInput={(params) => <TextField {...params} />}
                 />
-              </Grid2>
-              <Grid2 item xs={12}>
-                <TextField
-                  label="Image"
-                  fullWidth
-                  name="image"
-                  value={formData.image}
-                  onChange={handleChange}
-                />
-              </Grid2>
-              <Grid2 item xs={12}>
-                <TextField
-                  label="Description"
-                  fullWidth
-                  multiline
-                  name="description"
-                  value={formData.description}
-                  onChange={handleChange}
-                />
-              </Grid2>
-              <Grid2 item xs={12}>
-                <Autocomplete
-                  multiple
-                  id="multiple-limit-tags"
-                  options={tags}
-                  onChange={handleTagsChange}
-                  getOptionLabel={(option) => option}
-                  renderInput={(params) => (
-                    <TextField label="Tags" fullWidth {...params} />
-                  )}
-                />
-              </Grid2>
-              <Grid2 item xs={12}>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DateTimePicker label="Basic date time picker" />
-                </LocalizationProvider>
-              </Grid2>
-            </Grid2>
+              </LocalizationProvider>
+              <Button
+                fullWidth
+                type="submit"
+                className="customeButton"
+                sx={{ width: "320px", padding: ".9rem" }}
+              >
+                Create
+              </Button>
+            </div>
           </form>
         </Box>
       </Modal>

@@ -16,17 +16,18 @@ const role = "ROLE_ADMIN";
 
 const Sidebar = () => {
   const [activeMenu, setActiveMenu] = useState("DONE");
-
   const [OpenCreateTaskForm, setOpenCreateTaskForm] = useState(false);
+
   const handleCloseCreateTaskForm = () => {
     setOpenCreateTaskForm(false);
   };
+
   const handleOpenCreateTaskModel = () => {
     setOpenCreateTaskForm(true);
   };
 
   const handleMenuChange = (item) => {
-    if (item.name == "Create New Task") {
+    if (item.name === "Create New Task") {
       handleOpenCreateTaskModel();
     }
     setActiveMenu(item.name);
@@ -35,6 +36,7 @@ const Sidebar = () => {
   const handleLogout = () => {
     console.log("Handle Log");
   };
+
   return (
     <>
       <div className="card min-h-[75vh] flex flex-col justify-center w-[20vw] sidebar">
@@ -50,6 +52,7 @@ const Sidebar = () => {
             .filter((item) => item.role.includes(role))
             .map((item) => (
               <p
+                key={item.name}
                 onClick={() => handleMenuChange(item)}
                 className={`py-3 px-5 rounded-full text-center 
                 cursor-pointer ${
