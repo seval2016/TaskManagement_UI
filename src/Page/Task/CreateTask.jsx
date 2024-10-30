@@ -27,7 +27,7 @@ export default function CreateNewTaskForm({ handleClose, open }) {
     image: "",
     description: "",
     tags: [],
-    deadline: dayjs(), // Başlangıçta geçerli bir dayjs nesnesi
+    deadline: dayjs(),
   });
 
   const [selectedTags, setSelectedTags] = useState([]);
@@ -48,7 +48,7 @@ export default function CreateNewTaskForm({ handleClose, open }) {
     if (date && date.isValid()) {
       setFormData({
         ...formData,
-        deadline: date, // Her zaman bir dayjs nesnesi olarak güncelleniyor
+        deadline: date,
       });
     } else {
       console.error("Geçersiz tarih seçildi.");
@@ -57,7 +57,7 @@ export default function CreateNewTaskForm({ handleClose, open }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formattedDeadline = formData.deadline.isValid() ? formData.deadline.toISOString() : ""; // ISO formatına çevir
+    const formattedDeadline = formData.deadline.isValid() ? formData.deadline.toISOString() : "";
 
     const submittedData = {
       ...formData,
