@@ -1,7 +1,7 @@
-import {TextField, Button } from "@mui/material";
+import { TextField, Button } from "@mui/material";
 import React, { useState } from "react";
 
-const Signin = () => {
+const Signin = ({ togglePanel }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -49,6 +49,10 @@ const Signin = () => {
           </Button>
         </div>
       </form>
+      <div className="mt-5 flex items-center gap-2 py-5 justify-center">
+        <span>don't have an account ?</span>
+        <Button onClick={togglePanel}>Signup</Button>
+      </div>
     </div>
   );
 };
