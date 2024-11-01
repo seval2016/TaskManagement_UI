@@ -3,14 +3,20 @@ import darkTheme from "./theme/darkTheme";
 import Navbar from "./Page/Navbar/Navbar";
 import Home from "./Page/Home/Home";
 import Auth from "./Page/Auth/Auth";
-
+import { useState } from "react";
 
 function App() {
+  const user =true;
   return (
     <ThemeProvider theme={darkTheme}>
-      {/*<Navbar />
-      <Home /> */}
-      <Auth/>
+      {user ? (
+        <div>
+          <Navbar />
+          <Home />
+        </div>
+      ) : (
+        <Auth />
+      )}
     </ThemeProvider>
   );
 }

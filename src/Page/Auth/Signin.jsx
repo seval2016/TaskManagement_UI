@@ -26,7 +26,7 @@ const Signin = ({ togglePanel }) => {
           type="email"
           value={formData.email}
           onChange={handleChange}
-          placeholder="enter your email..."
+          placeholder="Enter your email..."
         />
         <TextField
           fullWidth
@@ -35,7 +35,7 @@ const Signin = ({ togglePanel }) => {
           type="password"
           value={formData.password}
           onChange={handleChange}
-          placeholder="enter your password..."
+          placeholder="Enter your password..."
         />
 
         <div>
@@ -50,7 +50,7 @@ const Signin = ({ togglePanel }) => {
         </div>
       </form>
       <div className="mt-5 flex items-center gap-2 py-5 justify-center">
-        <span>don't have an account ?</span>
+        <span>Don't have an account ?</span>
         <Button onClick={togglePanel}>Signup</Button>
       </div>
     </div>

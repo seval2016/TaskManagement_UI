@@ -34,7 +34,7 @@ const Signup = ({ togglePanel }) => {
           type="fullName"
           value={formData.fullName}
           onChange={handleChange}
-          placeholder="enter your full name..."
+          placeholder="Enter your full name..."
         />
         <TextField
           fullWidth
@@ -43,7 +43,7 @@ const Signup = ({ togglePanel }) => {
           type="email"
           value={formData.email}
           onChange={handleChange}
-          placeholder="enter your email..."
+          placeholder="Enter your email..."
         />
         <TextField
           fullWidth
@@ -52,7 +52,7 @@ const Signup = ({ togglePanel }) => {
           type="password"
           value={formData.password}
           onChange={handleChange}
-          placeholder="enter your password..."
+          placeholder="Enter your password..."
         />
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Role</InputLabel>
